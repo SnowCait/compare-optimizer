@@ -33,7 +33,7 @@ console.log("[events]", events.length);
  * Filter
  */
 
-const regex = /https:\/\/.+?\.(avif|jpg|jpeg|png|webp)/g;
+const regex = /https:\/\/\S+?\.(avif|jpg|jpeg|png|webp)/g;
 const filteredEvents = events.filter((event) => regex.test(event.content));
 console.log("[filtered events]", filteredEvents);
 
@@ -83,7 +83,7 @@ for (const url of urls) {
     } else {
       console.error("[something wrong]");
     }
-    const totalSize = totalTimes.get(key);
+    const totalSize = totalSizes.get(key);
     if (totalSize !== undefined) {
       totalSizes.set(key, totalSize + size);
     } else {
@@ -114,7 +114,7 @@ for (const url of urls) {
       } else {
         console.error("[something wrong]");
       }
-      const totalSize = totalTimes.get(key);
+      const totalSize = totalSizes.get(key);
       if (totalSize !== undefined) {
         totalSizes.set(key, totalSize + size);
       } else {
