@@ -85,7 +85,12 @@ for (const url of urls) {
   for (const [key, optimizerUrl] of optimizers) {
     const requestUrl = `${optimizerUrl}${url}`;
     const start = Date.now();
-    const response = await fetch(requestUrl);
+    const response = await fetch(requestUrl, {
+      headers: {
+        "Accept":
+          "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      },
+    });
     const time = Date.now() - start;
     const size = Number(response.headers.get("Content-Length"));
 
