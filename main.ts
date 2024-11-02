@@ -55,11 +55,11 @@ if (urls.length === 0) {
 const optimizers = [
   [
     "ocknamo",
-    "https://nostr-image-optimizer.ocknamo.com/image/width=800,quality=60,format=webp/",
+    "https://nostr-image-optimizer.ocknamo.com/image/quality=60,width=800,format=webp/",
   ],
   [
     "yabu.me",
-    "https://api.yabu.me/v0/images/optimize/width=800,quality=60,format=webp/",
+    "https://api.yabu.me/v0/images/optimize/quality=60,width=800,format=webp/",
   ],
   [
     "none",
