@@ -43,7 +43,7 @@ console.log("[filtered events]", filteredEvents);
 const urls = filteredEvents.flatMap((
   event,
 ) => event.content.match(regex)).filter((x) => x !== null);
-console.log("[urls]", urls);
+console.log("[urls]", urls, urls.length);
 
 /**
  * Compare
@@ -53,25 +53,37 @@ if (urls.length === 0) {
 }
 
 const optimizers = [
-  ["ocknamo", "https://nostr-image-optimizer.ocknamo.com/image/"],
-  ["yabu.me", "https://api.yabu.me/v0/images/optimize/"],
+  [
+    "ocknamo",
+    "https://nostr-image-optimizer.ocknamo.com/image/width=800,quality=60,format=webp/",
+  ],
+  [
+    "yabu.me",
+    "https://api.yabu.me/v0/images/optimize/width=800,quality=60,format=webp/",
+  ],
+  [
+    "none",
+    "",
+  ],
 ];
 
 const totalTimes = new Map([
   ["ocknamo", 0],
   ["yabu.me", 0],
+  ["none", 0],
 ]);
 
 const totalSizes = new Map([
   ["ocknamo", 0],
   ["yabu.me", 0],
+  ["none", 0],
 ]);
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 for (const url of urls) {
   for (const [key, optimizerUrl] of optimizers) {
-    const requestUrl = `${optimizerUrl}width=800,quality=60,format=webp/${url}`;
+    const requestUrl = `${optimizerUrl}${url}`;
     const start = Date.now();
     const response = await fetch(requestUrl);
     const time = Date.now() - start;
